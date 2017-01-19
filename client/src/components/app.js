@@ -4,7 +4,7 @@ class App extends Component{
 	render(){
 		return(
 			<div>
-				<p>Just Search</p>
+				<p>Just Search Header</p>
 				<div class="container">
 					{React.cloneElement(this.props.children, this.props)}
 				</div>

@@ -8,12 +8,12 @@ const form = reduxForm({
   validate
 });
 
-const renderField = field => {
+const renderField = (field) => (
   <div>
     <input className="form-control" {...field.input} />
-    {field.touched && field.error && <div className="error">{field.error}</div>}
+    { field.touched && field.error && <div className="error">{field.error}</div>}
   </div>
-}
+)
 
 function validate(formProps){
   const errors = {};
@@ -30,10 +30,14 @@ function validate(formProps){
   if(!formProps.password){
     errors.password = 'Please enter a password';
   }
+  if(!formProps.zipCode){
+    errors.zipCode = 'Please enter a zipcode';
+  }
   return errors;
 }
 
 class Register extends Component {
+
   handleFormSubmit(formProps){
     this.props.registerUser(formProps);
   }
@@ -47,9 +51,9 @@ class Register extends Component {
       )
     }
   }
+
   render(){
     const { handleSubmit } = this.props;
-
     return (
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         <div className="row">
@@ -71,12 +75,11 @@ class Register extends Component {
           </div>
           <div className="col-md-6">
             <label>Zipcode</label>
-            <Field name="ZipCode" className="form-control" component={renderField} type="text" />
+            <Field name="zipCode" className="form-control" component={renderField} type="text" />
           </div>
           <button type="submit" className="btn btn-primary">Register</button>
         </div>
       </form>
-
     )
   }
 }
@@ -88,8 +91,7 @@ function mapStateToProps(state){
   }
 }
 
-export default connect(mapStateToProps,{registerUser})(form(Register))
-
+export default connect(mapStateToProps,{registerUser})(form(Register));
 
 
 
