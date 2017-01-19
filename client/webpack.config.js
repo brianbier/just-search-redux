@@ -1,7 +1,7 @@
-const webpack = require('webpack');
+const webpack = require('webpack');  
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const config = {
+const config = {  
   context: __dirname,
   entry: './src/index.js',
   output: {
@@ -9,10 +9,10 @@ const config = {
     filename: 'bundle.js'
   },
   module: {
-    loaders:[{
+    loaders: [{
       exclude: /node_modules/,
       test: /\.(js|jsx)$/,
-      loaders: 'babel'
+      loader: 'babel'
     },
     {
       test: /\.scss$/,
@@ -23,22 +23,22 @@ const config = {
     historyApiFallback: true,
     contentBase: './'
   },
-  plugins:[
-    new webpack.DefinePlugin({'process.env':{'NODE_ENV':JSON.stringify('production')}}),
+  plugins: [
+    new webpack.DefinePlugin({ 'process.env':{ 'NODE_ENV': JSON.stringify('production') } }),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccuranceOrderPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {warnings: false},
-      output: {comments:false},
+      compress: { warnings: false },
+      output: {comments: false },
       mangle: false,
       sourcemap: false,
       minimize: true,
-      mangle: {except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad'] }
+      mangle: { except: ['$super', '$', 'exports', 'require', '$q', '$ocLazyLoad'] }
     }),
-    new ExtractTextPlugin('src/public/stylesheets/app.css',{
+    new ExtractTextPlugin('src/public/stylesheets/app.css', {
       allChunks: true
     })
   ]
 };
 
-module.exports = config;
+module.exports = config;  
