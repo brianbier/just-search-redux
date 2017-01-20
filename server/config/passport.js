@@ -34,7 +34,6 @@ const jwtOptions = {
 
 // Now, we can set up our JWT login strategy and pass our options through
 const jwtlogin = new JwtStrategy(jwtOptions,function(payload,done){
-  console.log(payload);
   User.findById(payload._id,function(err,user){
     if(err) return done(err,false);
 

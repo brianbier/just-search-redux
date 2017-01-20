@@ -30,6 +30,10 @@ module.exports = function(app) {
   // Set auth routes as subgroup/middleware to apiRoutes
   apiRoutes.use('/auth', authRoutes);
 
+  authRoutes.get('/protected',requireAuth, (req,res)=>{
+    // console.log(req)
+    res.send({ content: 'The protected test route is functional!',authenticated: true});
+  })
   
   // Registration route
   authRoutes.post('/register', AuthenticationController.register);
