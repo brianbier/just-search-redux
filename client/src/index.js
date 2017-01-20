@@ -7,8 +7,10 @@ import reduxThunk from 'redux-thunk';
 import routes from './routes';  
 import reducers from './components/reducers/';
 import { AUTH_USER } from './components/actions/types';
-import cookie from 'react-cookie';  
+import cookie from 'react-cookie';
+import createLogger from 'redux-logger';
 
+const loggerMiddleware = createLogger();
 // Import stylesheets like this, if you choose: import './public/stylesheets/base.scss';
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);  

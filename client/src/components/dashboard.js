@@ -5,8 +5,7 @@ import * as actions from './actions';
 class Dashboard extends Component {
   constructor(props){
     super(props);
-    console.log(this.props)
-    // this.props.protectedTests();
+    this.props.protectedTest();
   }
 
   renderContent(){

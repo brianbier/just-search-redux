@@ -3,7 +3,6 @@ import {AUTH_USER,UNAUTH_USER,AUTH_ERROR,PROTECTED_TEST} from'../actions/types';
 const INITIAL_STATE = { error: '', message: '', content: '', authenticated: false }
 
 export const authReducer = (state = INITIAL_STATE, action) => {
-// export default (state = INITIAL_STATE, action) =>{  
   switch(action.type){
     case AUTH_USER:
       return {...state, error: '', message: '', authenticated: true};
@@ -12,7 +11,9 @@ export const authReducer = (state = INITIAL_STATE, action) => {
     case AUTH_ERROR:
       return {...state, error: action.payload};
     case PROTECTED_TEST:
-      return {...state, content: action.payload};
+    console.log(action);
+    console.log({...state, content: action.payload, authenticated: action.auth});
+      return {...state, content: action.payload, authenticated: action.auth};
     default:
      return state;
   }

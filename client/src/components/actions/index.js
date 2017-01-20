@@ -76,13 +76,15 @@ export function logoutUser() {
 
 export function protectedTest() {  
   return function(dispatch) {
-    axios.get(`${API_URL}/protected`, {
+    axios.get(`${API_URL}/auth/protected`, {
       headers: { 'Authorization': cookie.load('token') }
     })
     .then(response => {
+      console.log(response)
       dispatch({
         type: PROTECTED_TEST,
-        payload: response.data.content
+        payload: response.data.content,
+        auth: response.data.authenticated
       });
     })
     .catch((error) => {
