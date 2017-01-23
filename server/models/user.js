@@ -6,6 +6,8 @@ const ROLE_CLIENT = require('../constants').ROLE_CLIENT;
 const ROLE_OWNER = require('../constants').ROLE_OWNER;
 const ROLE_ADMIN = require('../constants').ROLE_ADMIN;
 
+const Schema = mongoose.Schema;
+
 //==============
 // User Schema
 //==============
