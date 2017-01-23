@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   authRoutes.get('/protected',requireAuth, (req,res)=>{
     // console.log(req)
-    res.send({ content: 'The protected test route is functional!',authenticated: true});
+    res.send({ content: 'The protected test route is functional!', authenticated: true});
   })
   
   // Registration route

@@ -1,40 +1,28 @@
-"use strict"
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const User = require('../models/user');
+const config = require('../config/main');
 
-const jwt = require('jsonwebtoken'),
-      crypto = require('crypto'),
-      User = require('../models/user'),
-      config = require('../config/main');
-
-//We need to create a function to generate a JSON web token from the user object we pass in.
-function generateToken(user){
-  return jwt.sign(user,config.secret,{
-    expiresIn: 10080 // in seconds
-  })
-}
-
-// Let's create a function to select the user information we want to pass through:eventually store in a cookie
-// Set user info from request
-function setUserInfo(request) {  
-  return {
-    _id: request._id,
-    firstName: request.profile.firstName,
-    lastName: request.profile.lastName,
-    email: request.email,
-    role: request.role,
-  };
-}
-//========================================
-// Login Route
-//========================================
-exports.login = function(req, res, next) {
-
-  let userInfo = setUserInfo(req.user);
-
-  res.status(200).json({
-    token: 'JWT ' + generateToken(userInfo),
-    user: userInfo
+// Generate JWT
+// TO-DO Add issuer and audience
+function generateToken(user) {
+  return jwt.sign(user, config.secret, {
+    expiresIn: 604800 // in seconds
   });
 }
+
+//= =======================================
+// Login Route
+//= =======================================
+exports.login = function (req, res, next) {
+  const userInfo = setUserInfo(req.user);
+
+  res.status(200).json({
+    token: `JWT ${generateToken(userInfo)}`,
+    user: userInfo
+  });
+};
+
 
 
 //========================================
@@ -95,41 +83,37 @@ exports.register = function(req, res, next) {
         let userInfo = setUserInfo(user);
 
         res.status(201).json({
-          token: 'JWT ' + generateToken(userInfo),
+          token: `JWT ${generateToken(userInfo)}`,
           user: userInfo
         });
       });
   });
 }
 
-
-//========================================
+//= =======================================
 // Authorization Middleware
-//========================================
+//= =======================================
 
 // Role authorization check
-
-
-exports.roleAuthorization = function(role){
-  return function(req,res,next){
+exports.roleAuthorization = function (requiredRole) {
+  return function (req, res, next) {
     const user = req.user;
 
-    User.findbyId(user._id, function(err,foundUser){
-      if(err){
-        res.status(422).json({error: 'No user was found.'});
+    User.findById(user._id, (err, foundUser) => {
+      if (err) {
+        res.status(422).json({ error: 'No user was found.' });
         return next(err);
       }
 
       // If user is found, check role.
-      if(foundUser.role == role){
+      if (getRole(foundUser.role) >= getRole(requiredRole)) {
         return next();
       }
 
-      res.status(401).json({error: 'You are not authorized to view this content.'});
-      return next('Unauthorized');
-    })
-  }
-}
+      return res.status(401).json({ error: 'You are not authorized to view this content.' });
+    });
+  };
+};
 
 
 // Need to create "forgot password" and "reset password" routes in the future
