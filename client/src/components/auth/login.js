@@ -1,20 +1,20 @@
-import React, { Component } from 'react';  
-import { connect } from 'react-redux';  
-import { Field, reduxForm } from 'redux-form';  
-import { Link } from 'react-router';  
-import { loginUser } from '../actions';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router';
+import { loginUser } from '../../actions/auth';
 
 const form = reduxForm({
-  form: 'login'
+  form: 'login',
 });
 
 class Login extends Component {
-  handleFormSubmit(formProps){
-    this.props.loginUser(formProps)
+  handleFormSubmit(formProps) {
+    this.props.loginUser(formProps);
   }
 
   renderAlert() {
-    if(this.props.errorMessage) {
+    if (this.props.errorMessage) {
       return (
         <div>
           <span><strong>Error!</strong> {this.props.errorMessage}</span>
@@ -22,13 +22,14 @@ class Login extends Component {
       );
     }
   }
+
   render() {
     const { handleSubmit } = this.props;
 
     return (
       <div>
         <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        {this.renderAlert()}
+          {this.renderAlert()}
           <div>
             <label>Email</label>
             <Field name="email" className="form-control" component="input" type="text" />
@@ -39,20 +40,18 @@ class Login extends Component {
           </div>
           <button type="submit" className="btn btn-primary">Login</button>
         </form>
+        <Link to="/forgot-password">Forgot Password?</Link>
       </div>
     );
   }
-
 }
 
-function mapStateToProps(state) {  
+function mapStateToProps(state) {
   return {
     errorMessage: state.auth.error,
-    message: state.auth.message
+    message: state.auth.message,
+    authenticated: state.auth.authenticated,
   };
 }
 
-export default connect(mapStateToProps, { loginUser })(form(Login));  
-
-
-
+export default connect(mapStateToProps, { loginUser })(form(Login));
