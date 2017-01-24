@@ -22,11 +22,20 @@ exports.getRole = function getRole(checkRole) {
   let role;
 
   switch (checkRole) {
-    case ROLE_ADMIN: role = 4; break;
-    case ROLE_OWNER: role = 3; break;
-    case ROLE_CLIENT: role = 2; break;
-    case ROLE_MEMBER: role = 1; break;
-    default: role = 1;
+    case ROLE_ADMIN: 
+      role = 4; 
+      break;
+    case ROLE_OWNER: 
+      role = 3; 
+      break;
+    case ROLE_CLIENT: 
+      role = 2;
+      break;
+    case ROLE_MEMBER: 
+      role = 1;
+      break;
+    default: 
+      role = 1;
   }
 
   return role;

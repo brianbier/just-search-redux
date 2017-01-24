@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/user');
+const setUserInfo = require('../helpers').setUserInfo;
+const getRole = require('../helpers').getRole;
 const config = require('../config/main');
 
 // Generate JWT
