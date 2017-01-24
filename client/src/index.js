@@ -1,24 +1,41 @@
-import React from 'react';  
-import ReactDOM from 'react-dom';  
-import { Provider } from 'react-redux';  
-import { createStore, applyMiddleware } from 'redux';  
-import { Router, browserHistory } from 'react-router';  
-import reduxThunk from 'redux-thunk';  
-import routes from './routes';  
-import reducers from './components/reducers/';
-import { AUTH_USER } from './components/actions/types';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { Router, browserHistory } from 'react-router';
+import reduxThunk from 'redux-thunk';
 import cookie from 'react-cookie';
+import routes from './routes';
+import reducers from './reducers/index';
+import ReactGA from 'react-ga';
+import { AUTH_USER } from './actions/types';
 import createLogger from 'redux-logger';
+
+// Initialize Google Analytics
+ReactGA.initialize('UA-000000-01');
+
+function logPageView() {
+  ReactGA.pageview(window.location.pathname);
+}
+
 
 const loggerMiddleware = createLogger();
 // Import stylesheets like this, if you choose: import './public/stylesheets/base.scss';
 
-const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);  
+const createStoreWithMiddleware = applyMiddleware(reduxThunk,loggerMiddleware)(createStore);  
 
 const store = createStoreWithMiddleware(reducers);
 
-ReactDOM.render(  
+const token = cookie.load('token');
+
+if (token) {
+  // Update application state. User has token and is probably authenticated
+  store.dispatch({ type: AUTH_USER });
+}
+
+
+ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
+    <Router history={browserHistory} routes={routes} onUpdate={logPageView} />
   </Provider>,
   document.querySelector('.root'));
