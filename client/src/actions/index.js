@@ -35,10 +35,11 @@ export function errorHandler(dispatch, error, type) {
 //       headers: { Authorization: cookie.load('token') },
 //     })
 //     .then((response) => {
-//       dispatch({
-//         type: FETCH_USER,
-//         payload: response.data.user,
-//       });
+//       console.log(response)
+//       // dispatch({
+//       //   type: FETCH_USER,
+//       //   payload: response.data.user,
+//       // });
 //     })
 //     .catch(response => dispatch(errorHandler(response.data.error)));
 //   };
