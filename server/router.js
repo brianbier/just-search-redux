@@ -41,11 +41,11 @@ module.exports = function(app) {
   // User Routes
   //= ========================
 
-  // // Set user routes as a subgroup/middleware to apiRoutes
-  // apiRoutes.use('/user', userRoutes);
+  // Set user routes as a subgroup/middleware to apiRoutes
+  apiRoutes.use('/user', userRoutes);
 
-  // // View user profile route
-  // userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
+  // View user profile route
+  userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
 
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
