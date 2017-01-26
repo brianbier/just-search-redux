@@ -125,60 +125,41 @@ exports.roleAuthorization = function (requiredRole) {
 //= =======================================
 exports.favorite = function (req, res, next) {
 
-  console.log(req);
+  // console.log(req);
 
-  // Check for registration errors
-  // const email = req.body.email;
-  // const firstName = req.body.firstName;
-  // const lastName = req.body.lastName;
-  // const password = req.body.password;
+  // Check for place errors
+  const placeId = req.body.id;
+  const placeName = req.body.name;
+  const user = req.user._id;
 
-  // // Return error if no email provided
-  // if (!email) {
-  //   return res.status(422).send({ error: 'You must enter an email address.' });
-  // }
+  Favorite.findOne({ placeId: placeId, user:user }, 'placeId user', (err, existingUser) => {
+    if (err) { 
+      return next(err); 
+    }
+    console.log('we found the user');
 
-  // // Return error if full name not provided
-  // if (!firstName || !lastName) {
-  //   return res.status(422).send({ error: 'You must enter your full name.' });
-  // }
+    console.log(existingUser)
+    // If is not unique, return error
+      if (existingUser) {
+        return res.status(422).send({ error: 'You have already saved to your list' });
+      }
 
-  // // Return error if no password provided
-  // if (!password) {
-  //   return res.status(422).send({ error: 'You must enter a password.' });
-  // }
+    // If user is unique, create new favorite
+    const favorite = new Favorite({
+      placeId,
+      placeName,
+      user
+    });
 
-  // User.findOne({ email }, (err, existingUser) => {
-  //   if (err) { return next(err); }
-
-  //     // If user is not unique, return error
-  //   if (existingUser) {
-  //     return res.status(422).send({ error: 'That email address is already in use.' });
-  //   }
-
-  //     // If email is unique and password was provided, create account
-  //   const user = new User({
-  //     email,
-  //     password,
-  //     profile: { firstName, lastName }
-  //   });
-
-  //   user.save((err, user) => {
-  //     if (err) { return next(err); }
-
-  //       // Subscribe member to Mailchimp list
-  //       // mailchimp.subscribeToNewsletter(user.email);
-
-  //       // Respond with JWT if user was created
-
-  //     const userInfo = setUserInfo(user);
-
-  //     res.status(201).json({
-  //       token: `JWT ${generateToken(userInfo)}`,
-  //       user: userInfo
-  //     });
-  //   });
-  // });
+    favorite.save((err, user) => {
+      if (err) { 
+        return next(err); 
+      }
+      res.status(201).json({
+        success: 'Success location was saved to database'
+      });
+    });
+  });
 };
 
 
