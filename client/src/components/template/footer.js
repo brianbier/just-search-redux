@@ -6,27 +6,27 @@ class FooterTemplate extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <li>
-          <Link to="/">Home</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="/">Home</Link>
         </li>,
-        <li>
-          <Link to="dashboard">Dashboard</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="dashboard">Dashboard</Link>
         </li>,
-        <li>
-          <Link to="logout">Logout</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="logout">Logout</Link>
         </li>,
       ];
     } else {
       return [
         // Unauthenticated navigation
-        <li>
-          <Link to="/">Home</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="/">Home</Link>
         </li>,
-        <li>
-          <Link to="login">Login</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="login">Login</Link>
         </li>,
-        <li>
-          <Link to="register">Register</Link>
+        <li className="nav-item">
+          <Link className="nav-link" to="register">Register</Link>
         </li>,
       ];
     }
@@ -37,18 +37,12 @@ class FooterTemplate extends Component {
     const year = date.getFullYear();
 
     return (
-      <footer>
-        <div>
-          <div>
-            <div>
-              <nav>
-                <ul>
-                  {this.renderLinks()}
-                </ul>
-              </nav>
-              <p>© {year}, Your Site. All Rights Reserved.</p>
-            </div>
-          </div>
+      <footer className="footer_container">
+        <div className="footer_navigation">
+          <ul className="nav">
+            {this.renderLinks()}
+          </ul>
+          <p>© {year}, Your Site. All Rights Reserved.</p>
         </div>
       </footer>
     );
