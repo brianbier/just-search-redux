@@ -29,6 +29,28 @@ export function errorHandler(dispatch, error, type) {
   // logoutUser();
 }
 
+export function googlePostData(data) {
+var userToken = cookie.load('token')
+
+var config = {
+  headers: {'Authorization': userToken}
+};
+  return function (dispatch) {
+    axios.post(`${API_URL}/auth/favorite`,data,config)
+    .then((response) => {
+      console.log(response)
+      // dispatch({
+      //   type: PROTECTED_TEST,
+      //   payload: response.data.content,
+      // });
+    })
+    .catch((error) => {
+      errorHandler(dispatch, error.response, AUTH_ERROR);
+    });
+  };
+}
+
+
 // export function fetchUser(uid) {
 //   return function (dispatch) {
 //     axios.get(`${API_URL}/user/${uid}`, {
