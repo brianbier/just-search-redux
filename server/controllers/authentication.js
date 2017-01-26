@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/user');
+const Favorite = require('../models/favorite');
 const setUserInfo = require('../helpers').setUserInfo;
 const getRole = require('../helpers').getRole;
 const config = require('../config/main');
@@ -118,6 +119,69 @@ exports.roleAuthorization = function (requiredRole) {
 
 
 // Need to create "forgot password" and "reset password" routes in the future
+
+//= =======================================
+// Registration Route
+//= =======================================
+exports.favorite = function (req, res, next) {
+
+  console.log(req);
+
+  // Check for registration errors
+  // const email = req.body.email;
+  // const firstName = req.body.firstName;
+  // const lastName = req.body.lastName;
+  // const password = req.body.password;
+
+  // // Return error if no email provided
+  // if (!email) {
+  //   return res.status(422).send({ error: 'You must enter an email address.' });
+  // }
+
+  // // Return error if full name not provided
+  // if (!firstName || !lastName) {
+  //   return res.status(422).send({ error: 'You must enter your full name.' });
+  // }
+
+  // // Return error if no password provided
+  // if (!password) {
+  //   return res.status(422).send({ error: 'You must enter a password.' });
+  // }
+
+  // User.findOne({ email }, (err, existingUser) => {
+  //   if (err) { return next(err); }
+
+  //     // If user is not unique, return error
+  //   if (existingUser) {
+  //     return res.status(422).send({ error: 'That email address is already in use.' });
+  //   }
+
+  //     // If email is unique and password was provided, create account
+  //   const user = new User({
+  //     email,
+  //     password,
+  //     profile: { firstName, lastName }
+  //   });
+
+  //   user.save((err, user) => {
+  //     if (err) { return next(err); }
+
+  //       // Subscribe member to Mailchimp list
+  //       // mailchimp.subscribeToNewsletter(user.email);
+
+  //       // Respond with JWT if user was created
+
+  //     const userInfo = setUserInfo(user);
+
+  //     res.status(201).json({
+  //       token: `JWT ${generateToken(userInfo)}`,
+  //       user: userInfo
+  //     });
+  //   });
+  // });
+};
+
+
 
 
 

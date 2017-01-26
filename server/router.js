@@ -36,6 +36,7 @@ module.exports = function(app) {
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);
 
+  authRoutes.post('/favorite',requireAuth, AuthenticationController.favorite);
 
   //= ========================
   // User Routes
