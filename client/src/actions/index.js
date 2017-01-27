@@ -50,6 +50,23 @@ var config = {
   };
 }
 
+export function fetchFavorite(uid) {
+  return function (dispatch) {
+    axios.get(`${API_URL}/auth/favorite/${uid}`, {
+      headers: { Authorization: cookie.load('token') },
+    })
+    .then((response) => {
+      dispatch({
+        type: FETCH_FAVORITE,
+        payload: response.data.favorites
+      });
+    })
+    .catch(response => dispatch(errorHandler(response.data.error)));
+  };
+}
+
+
+
 
 // export function fetchUser(uid) {
 //   return function (dispatch) {
