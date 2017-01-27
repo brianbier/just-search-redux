@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
 
 const FavoriteSchema = new Schema({
   placeId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true
   },
   placeName: {

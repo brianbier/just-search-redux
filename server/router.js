@@ -13,7 +13,6 @@ const passportService = require('./config/passport');
 // You would use requireAuth as a middleware for a route you want to protect. Maybe your app sends an email or something, but you only want authenticated users to be able to send an email:
 // emailRoutes.post('/login', requireAuth, EmailController.sendEmail);
 const requireAuth = passport.authenticate('jwt',{ session: false });
-
 // This middle ware requires you to be login
 const requireLogin = passport.authenticate('local',{ session: false });
 
