@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER } from './types';
+import { STATIC_ERROR, FETCH_USER, AUTH_ERROR, SAVE_FAVORITE, FETCH_FAVORITE } from './types';
 
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
@@ -39,10 +39,10 @@ var config = {
     axios.post(`${API_URL}/auth/favorite`,data,config)
     .then((response) => {
       console.log(response)
-      // dispatch({
-      //   type: PROTECTED_TEST,
-      //   payload: response.data.content,
-      // });
+      dispatch({
+        type: SAVE_FAVORITE,
+        payload: response.data.success,
+      });
     })
     .catch((error) => {
       errorHandler(dispatch, error.response, AUTH_ERROR);

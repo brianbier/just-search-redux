@@ -113,7 +113,7 @@ class HomePage extends Component {
                         content.innerHTML = result.name
                         let button = content.appendChild(document.createElement('input'));
                         button.type = 'button';
-                        button.value = 'click here';
+                        button.value = 'Favorite';
                         google.maps.event.addDomListener(button, 'click', function () {
                             displaybutton(result);
                         })
