@@ -37,6 +37,8 @@ module.exports = function(app) {
 
   authRoutes.post('/favorite',requireAuth, AuthenticationController.favorite);
 
+  authRoutes.get('/favorite/:userId',requireAuth, AuthenticationController.viewFavorites);
+
   //= ========================
   // User Routes
   //= ========================

@@ -121,7 +121,7 @@ exports.roleAuthorization = function (requiredRole) {
 // Need to create "forgot password" and "reset password" routes in the future
 
 //= =======================================
-// Registration Route
+// Favorite Route
 //= =======================================
 exports.favorite = function (req, res, next) {
 
@@ -159,6 +159,23 @@ exports.favorite = function (req, res, next) {
         success: 'Success location was saved to database'
       });
     });
+  });
+};
+
+
+exports.viewFavorites = function (req, res, next) {
+
+  const userId = req.params.userId;
+  if (req.user._id.toString() !== userId) { return res.status(401).json({ error: 'You are not authorized to view this user profile.' }); }
+  
+  Favorite.find({user: userId },'placeId placeName user', (err, userData) => {
+    console.log(userData)  
+    if (err) {
+      res.status(400).json({ error: 'Search for favorite places and begin to populate this list' });
+      return next(err);
+    }
+
+    return res.status(200).json({ favorites: userData });
   });
 };
 
