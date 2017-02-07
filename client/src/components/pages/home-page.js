@@ -27,7 +27,7 @@ class HomePage extends Component {
               let map = new google.maps.Map(document.getElementById('map'), {
                 center: coordinates,
                 zoom: 15,
-                scrollwheel: false
+                disableDefaultUI: true
               });
 
               let inputBox = document.getElementById('map_input');
@@ -133,7 +133,7 @@ class HomePage extends Component {
     }
   renderMap(){
         return[
-          <input id="map_input" className="controls" type="text" placeholder="Search Box"/>,
+          <input id="map_input" className="controls" type="text" placeholder="Search Places"/>,
           <div id="map"></div> 
         ]
   }
