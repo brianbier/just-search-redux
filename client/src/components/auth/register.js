@@ -10,7 +10,7 @@ const form = reduxForm({
 
 const renderField = field => (
   <div>
-    <input className="form-control" {...field.input} />
+    <input className="form_control" {...field.input} />
     {field.touched && field.error && <div className="error">{field.error}</div>}
   </div>
 );
@@ -58,38 +58,52 @@ class Register extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
+      <div className="form_container">
       <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
         {this.renderAlert()}
         <div className="row">
           <div className="col-md-6">
-            <label>First Name</label>
-            <Field name="firstName" className="form-control" component={renderField} type="text" />
+            <div className="input_field">
+              <label className="input_label" >First Name</label>
+              <Field name="firstName" className="form_control" component={renderField} type="text" />
+            </div>
           </div>
           <div className="col-md-6">
-            <label>Last Name</label>
-            <Field name="lastName" className="form-control" component={renderField} type="text" />
+            <div className="input_field">
+              <label className="input_label" >Last Name</label>
+              <Field name="lastName" className="form_control" component={renderField} type="text" />
+            </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <label>Email</label>
-            <Field name="email" className="form-control" component={renderField} type="text" />
+            <div className="input_field">
+              <label>Email</label>
+              <Field name="email" className="form_control" component={renderField} type="text" />
+            </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <label>Password</label>
-            <Field name="password" className="form-control" component={renderField} type="password" />
+            <div className="input_field">
+              <label>Password</label>
+              <Field name="password" className="form_control" component={renderField} type="password" />
+            </div>
           </div>
         </div>
         <div className="row">
           <div className="col-md-12">
-            <label>Zipcode</label>
-            <Field name="zipCode" className="form-control" component={renderField} type="zipCode" />
+            <div className="input_field">
+              <label>Zipcode</label>
+              <Field name="zipCode" className="form_control" component={renderField} type="zipCode" />
+            </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Register</button>
+        <button type="submit" className="login_submit">Register</button>
       </form>
+      </div>
+
+
     );
   }
 }

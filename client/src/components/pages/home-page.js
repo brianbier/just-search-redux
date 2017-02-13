@@ -27,7 +27,7 @@ class HomePage extends Component {
               let map = new google.maps.Map(document.getElementById('map'), {
                 center: coordinates,
                 zoom: 15,
-                scrollwheel: false
+                disableDefaultUI: true
               });
 
               let inputBox = document.getElementById('map_input');
@@ -109,11 +109,17 @@ class HomePage extends Component {
                         if (status !== google.maps.places.PlacesServiceStatus.OK) {
                         return;
                         }
-                        let content  = document.createElement('p')
-                        content.innerHTML = result.name
-                        let button = content.appendChild(document.createElement('input'));
+                        let content  = document.createElement('div');
+                        content.className += "company_name";
+                        content.innerHTML = result.name;
+                        let line_break = document.createElement('br')
+                        content.appendChild(line_break);
+
+                        let button = document.createElement('input')
+                        button.className += "info_button";
                         button.type = 'button';
-                        button.value = 'Favorite';
+                        button.value = 'Add To Favorite';
+                        content.append(button);
                         google.maps.event.addDomListener(button, 'click', function () {
                             displaybutton(result);
                         })
@@ -133,7 +139,7 @@ class HomePage extends Component {
     }
   renderMap(){
         return[
-          <input id="map_input" className="controls" type="text" placeholder="Search Box"/>,
+          <input id="map_input" className="controls" type="text" placeholder="Search Places"/>,
           <div id="map"></div> 
         ]
   }
