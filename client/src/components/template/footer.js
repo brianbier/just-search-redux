@@ -6,45 +6,37 @@ class FooterTemplate extends Component {
   renderLinks() {
     if (this.props.authenticated) {
       return [
-        <li className="nav-item">
-          <Link className="nav-link" to="/">Home</Link>
+        <li className="footer_nav_list_item">
+          <Link className="footer_nav_link" to="/">Home</Link>
         </li>,
-        <li className="nav-item">
-          <Link className="nav-link" to="dashboard">Dashboard</Link>
+        <li className="footer_nav_list_item">
+          <Link className="footer_nav_link" to="dashboard">Dashboard</Link>
         </li>,
-        <li className="nav-item">
-          <Link className="nav-link" to="logout">Logout</Link>
+        <li className="footer_nav_list_item">
+          <Link className="footer_nav_link" to="logout">Logout</Link>
         </li>,
       ];
     } else {
       return [
         // Unauthenticated navigation
-        <li className="nav-item">
-          <Link className="nav-link" to="/">Home</Link>
+        <li className="footer_nav_list_item">
+          <Link className="footer_nav_link" to="/">Home</Link>
         </li>,
-        <li className="nav-item">
-          <Link className="nav-link" to="login">Login</Link>
+        <li className="footer_nav_list_item">
+          <Link className="footer_nav_link" to="login">Login</Link>
         </li>,
-        <li className="nav-item">
-          <Link className="nav-link" to="register">Register</Link>
+        <li className="footer_nav_list_item">
+          <Link className="footer_nav_link" to="register">Register</Link>
         </li>,
       ];
     }
   }
 
   render() {
-    const date = new Date();
-    const year = date.getFullYear();
-
     return (
-      <footer className="footer_container">
-        <div className="footer_navigation">
-          <ul className="nav">
+          <ul className="footer_nav_list">
             {this.renderLinks()}
           </ul>
-          <p>© {year}, Your Site. All Rights Reserved.</p>
-        </div>
-      </footer>
     );
   }
 }
