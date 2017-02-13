@@ -8,7 +8,7 @@ import NotFoundPage from './components/pages/not-found-page';
 
 // Import static pages
 import HomePage from './components/pages/home-page';
-
+import CityBike from './components/pages/city-bike';
 
 // Import authentication related pages
 import Register from './components/auth/register';
@@ -24,6 +24,7 @@ import RequireAuth from './components/auth/require_auth';
 export default (
 	<Route path="/" component={App}>
 		<IndexRoute component={HomePage} />
+    <Route path="/city-bike" component={CityBike} />
 		<Route path="/register" component={Register} />
 		<Route path="/login" component={Login} />
 		<Route path="/logout" component={Logout} />

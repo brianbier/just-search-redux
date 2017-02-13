@@ -25,12 +25,12 @@ class App extends Component {
         <footer>
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-5">
                 <div className="footer_nav">
-                  <p className="copy">© {year}, Your Site. All Rights Reserved.</p>
+                  <p className="copy">© {year}, Just Search. All Rights Reserved.</p>
                 </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-7">
               <FooterTemplate />
             </div>
           </div>

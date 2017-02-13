@@ -10,6 +10,9 @@ class HeaderTemplate extends Component {
           <Link className="primary_nav_link" to="/">Home</Link>
         </li>,
         <li className="primary_nav_list_item">
+          <Link className="primary_nav_link" to="/city-bike">City Bikes</Link>
+        </li>,
+        <li className="primary_nav_list_item">
           <Link className="primary_nav_link" to="dashboard">Dashboard</Link>
         </li>,
         <li className="primary_nav_list_item">
@@ -21,6 +24,9 @@ class HeaderTemplate extends Component {
         // Unauthenticated navigation
         <li className="primary_nav_list_item">
           <Link className="primary_nav_link" to="/">Home</Link>
+        </li>,
+        <li className="primary_nav_list_item">
+          <Link className="primary_nav_link" to="/city-bike">City Bikes</Link>
         </li>,
         <li className="primary_nav_list_item">
           <Link className="primary_nav_link" to="login">Login</Link>
