@@ -8,7 +8,7 @@ class App extends Component {
     const date = new Date();
     const year = date.getFullYear();
     return (
-        <div>
+        <div className="outer_container">
         <div className="container">
           <div className="row">
             <div className="col-md-3">
@@ -22,6 +22,7 @@ class App extends Component {
           </div>
         </div>
         {React.cloneElement(this.props.children, this.props)}
+        <footer>
         <div className="container">
           <div className="row">
             <div className="col-md-6">
@@ -34,6 +35,7 @@ class App extends Component {
             </div>
           </div>
         </div>
+        </footer>
         </div>
     );
   }
