@@ -1,6 +1,7 @@
 const AuthenticationController = require('./controllers/authentication');
 const UserController = require('./controllers/user');
 const express = require('express');
+const request = require('request');
 const passport = require('passport');
 const ROLE_MEMBER = require('./constants').ROLE_MEMBER;
 const ROLE_CLIENT = require('./constants').ROLE_CLIENT;
@@ -21,7 +22,7 @@ module.exports = function(app) {
   const apiRoutes = express.Router(),
     authRoutes = express.Router(),
     userRoutes = express.Router();
-
+    bikesRoutes = express.Router();
   //=========================
   // Auth Routes
   //=========================
@@ -49,6 +50,17 @@ module.exports = function(app) {
   // View user profile route
   userRoutes.get('/:userId', requireAuth, UserController.viewProfile);
 
+  // Set city routes as a subgroup/middleware to apiRoutes
+  apiRoutes.use('/city',bikesRoutes)
+  
+  // Get city bikes data
+  bikesRoutes.get('/bikes',function(req,res){
+    request('https://gbfs.citibikenyc.com/gbfs/en/station_information.json',function(error,response,body){
+    res.status(200).send(body)
+    })
+
+  })
+
   // Test protected route
   apiRoutes.get('/protected', requireAuth, (req, res) => {
     res.send({ content: 'The protected test route is functional!' });
@@ -58,7 +70,4 @@ module.exports = function(app) {
   // Set url for API group routes
   app.use('/api', apiRoutes);
 };
-
-
-
 
