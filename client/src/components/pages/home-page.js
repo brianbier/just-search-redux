@@ -5,10 +5,9 @@ import * as actions from '../../actions/index';
 
 class HomePage extends Component {  
   componentDidMount(){    
-    console.log(this.props)
+    // console.log(this.props)
     this.initializeMap(this.props);
   } 
-
     initializeMap(that){
         let markers = []
 
@@ -101,6 +100,7 @@ class HomePage extends Component {
                 });
                 
                 map.fitBounds(bounds)
+                  
                   function getInfo(place,marker){
                     google.maps.event.addListener(marker, 'click', function() {
                       map.setCenter(marker.getPosition());

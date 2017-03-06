@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 import { logoutUser } from './auth';
-import { STATIC_ERROR, FETCH_USER, AUTH_ERROR, SAVE_FAVORITE, FETCH_FAVORITE } from './types';
+import { STATIC_ERROR, FETCH_USER, AUTH_ERROR, SAVE_FAVORITE, FETCH_FAVORITE, FETCH_CITY_BIKES } from './types';
 
 export const API_URL = 'http://localhost:3000/api';
 export const CLIENT_ROOT_URL = 'http://localhost:8080';
@@ -65,6 +65,18 @@ export function fetchFavorite(uid) {
   };
 }
 
+export function fetchCityBikes() {
+  return function (dispatch) {
+    axios.get(`${API_URL}/city/bikes`)
+    .then((response) => {
+      dispatch({
+        type: FETCH_CITY_BIKES,
+        payload: response.data.data.stations
+      });
+    })
+    .catch(response => dispatch(errorHandler(response.data.error)));
+  };
+}
 
 
 

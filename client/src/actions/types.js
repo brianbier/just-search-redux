@@ -21,3 +21,11 @@ export const FETCH_USER = 'fetch_user';
 
 export const SAVE_FAVORITE = 'save_favorite';
 export const FETCH_FAVORITE = 'fetch_favorite';
+
+
+
+//= =====================
+// City Bikes
+//= =====================
+
+export const FETCH_CITY_BIKES = 'fetch_city_bikes';
