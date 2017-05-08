@@ -23,7 +23,7 @@ To start the application
 
 ![App][Application]
 
-[Application]: images/image.png "App"
+[Application]: main-photo.jpg "App"
 
 
 
