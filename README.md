@@ -15,11 +15,15 @@ To start the application
 -HTML
 -Bootstrap
 -JAVASCRIPT
---React
---Redux
---Node JS
---Express
---Mongoose
+-React
+-Redux
+-Node JS
+-Express
+-Mongoose
+
+![App][Application]
+
+[Application]: images/image.png "App"
 
 
 
