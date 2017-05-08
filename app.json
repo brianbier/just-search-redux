@@ -1,0 +1,7 @@
+{
+  "name": "Node.js Just Search Redux",
+  "description": "Just search",
+  "repository": "https://github.com/brianbier/just-search-redux.git",
+  "keywords": ["node","express","react"],
+  "image": "heroku/nodejs"
+}

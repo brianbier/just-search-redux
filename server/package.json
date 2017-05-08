@@ -19,5 +19,8 @@
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
     "request": "^2.80.0"
+  },
+  "engines": {
+    "node": "7.0.0"
   }
 }
